@@ -1,0 +1,30 @@
+name: quiz-app
+
+services:
+  db-pg-local:
+    image: postgres:15.18
+    container_name: postgres-dev
+    hostname: postgres
+
+    ports:
+      - "9042:5432"
+
+    environment:
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: dev
+      POSTGRES_DB: quizapp
+
+    volumes:
+      - postgres_data_local:/var/lib/postgresql/data
+
+    restart: unless-stopped
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dev -d dev_local"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data_local:
+    driver: local

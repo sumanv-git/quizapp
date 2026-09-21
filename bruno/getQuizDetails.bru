@@ -1,0 +1,16 @@
+meta {
+  name: getQuizDetails
+  type: http
+  seq: 6
+}
+
+get {
+  url: http://localhost:9040/quiz/getDetails/3
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
